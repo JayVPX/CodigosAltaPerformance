@@ -1,14 +1,35 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login</title>
-    <link rel="stylesheet" href="src/styles/styles.css" />
-  </head>
-  <body>
-    <button><a href="../index.html">Ir para login</a></button>
-    <button><a href="list.html">Ir para lista</a></button>
-    <button><a href="../api/index.html">Ir para API</a></button>
-  </body>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bem-vindo</title>
+  <link rel="stylesheet" href="../src/styles/styles.css" />
+  <link rel="stylesheet" href="../src/styles/home.css" />
+</head>
+<body>
+  <div class="login-container">
+    <h1>Olá, <span id="username">{User}</span></h1>
+    <p>Para onde gostaria de ir:</p>
+    <a href="usuarios.html"><button>Listagem de usuários</button></a>
+    <a href="api.html"><button>Ir para API</button></a>
+    <button onclick="voltarLogin()">Retornar para o Login</button>
+  </div>
+
+  <script>
+    const nome = localStorage.getItem("nickname");
+    const spanUser = document.getElementById("username");
+
+    if (nome) {
+      spanUser.textContent = nome;
+    } else {
+      spanUser.textContent = "visitante";
+    }
+
+    function voltarLogin() {
+      localStorage.removeItem("nickname");
+      window.location.href = "../index.html";
+    }
+  </script>
+</body>
 </html>
