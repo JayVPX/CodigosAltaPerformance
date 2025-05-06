@@ -1,0 +1,47 @@
+
+.login-container {
+    background-color: #423829;
+}
+.login-container h1 {
+    font-size: 32px;
+    margin-top: 30px;
+    color: #e2e2e2;
+    text-align: center;
+    
+  }
+  
+  .login-container p {
+    font-size: 18px;
+    color: #e1e1e1;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .login-container span {
+    font-size: 32px;
+    margin-top: 30px;
+    color: #e2e2e2;
+    text-align: center;
+  }
+  .login-container a {
+    text-decoration: none;
+  }
+  
+  .login-container button {
+    background-color: #877458; /* mesma cor base */
+    color: white;
+    font-size: 14px;
+    padding: 12px 30px;
+    margin: 10px auto;
+    border: none;
+    border-radius: 90px;
+    font-weight: 600;
+    cursor: pointer;
+    display: block;
+    width: 40%;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-container button:hover {
+    background-color: #a08c6a;
+  }
+  
