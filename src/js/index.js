@@ -39,10 +39,22 @@ function cadastrar() {
   // converte para stringify e guarda no local storage
   localStorage.setItem("usuarios", JSON.stringify(usuarios));
 
-  window.location.href = "branchs/home.html";
+  window.location.href = "pagInicial.html";
   console.log(usuarios);
 }
 
 function login() {
-  window.location.href = "branchs/home.html";
+  window.location.href = "pagInicial.html";
+}
+
+function goToList() {
+  window.location.href = "branchs/list.html";
+}
+
+function goToApi() {
+  window.location.href = "api/index.html";
+}
+
+function backToLogin() {
+  window.location.href = "index.html";
 }

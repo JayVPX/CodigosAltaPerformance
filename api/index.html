@@ -3,18 +3,30 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Atlas.IO</title>
+    <title>PokeGuess</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>ATLAS.IO</h1>
-    <input type="text" placeholder="Digite o nome do país" id="countryInput" />
-    <button type="button" onclick="renderAPI()">Inserir</button>
+    <!-- <h1>ATLAS.IO</h1>
+    <input type="text" placeholder="Digite o nome do país" id="countryInput" /> -->
+    <h1>PokeGuess - Adivinhe o Pokémon</h1>
+    <div class="input-section">
+      <input
+        type="text"
+        id="guess"
+        placeholder="Escreva o nome do Pokémon..."
+      />
+      <button id="submitGuess" onclick="getGuessedPokemon(randomPokemon)">
+        Enviar Palpite
+      </button>
+    </div>
+    <div id="guessesContainer"></div>
 
-    <h2 id="country"></h2>
+    <!-- <h2 id="country"></h2>
     <p id="sigla"></p>
     <p id="region"></p>
     <p id="language"></p>
-    <p id="population"></p>
+    <p id="population"></p> -->
     <script src="index.js"></script>
   </body>
 </html>
