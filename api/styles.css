@@ -5,3 +5,42 @@
   font-family: "Oswald", sans-serif;
   scroll-behavior: smooth;
 }
+
+h1 {
+  text-align: center;
+}
+.input-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#guess {
+  padding: 8px;
+  font-size: 16px;
+  width: 250px;
+}
+#submitGuess {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin-left: 8px;
+}
+#guessesContainer {
+  margin-top: 20px;
+}
+.guess-line {
+  display: flex;
+  margin: 8px 0;
+  gap: 5px;
+  justify-content: center;
+}
+.guess-box {
+  padding: 10px;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  min-width: 80px;
+}
+.guess-box img {
+  width: 40px;
+  height: 40px;
+}
