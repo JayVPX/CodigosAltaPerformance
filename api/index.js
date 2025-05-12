@@ -74,7 +74,7 @@ async function getRandomPokemon() {
     geracao: pkmSpeciesData.generation.name,
     nome: pokemonData.name,
     tipo1: pokemonData.types[0].type.name,
-    tipo2: pokemonData.types[1]?.type.name || "Não tem",
+    tipo2: pokemonData.types[1]?.type.name || "não tem",
     cor: pkmSpeciesData.color.name,
     habitat: pkmSpeciesData.habitat.name,
     peso: `${pokemonData.weight / 10} kg`,
@@ -85,10 +85,12 @@ async function getRandomPokemon() {
   return randomPkm;
 }
 
+//Função que compara os atributos dos pokemons e retorna uma flag "GREEN" (Truth) ou "RED" (false).
 function comparePokemonAtributos(atributoGuessPkm, atributoRandomPkm) {
   return atributoGuessPkm === atributoRandomPkm ? "green" : "red";
 }
 
+//Função que pega os dados do Pokemon escolhido pelo usuário
 async function getGuessedPokemon(randomPkmData) {
   const guess = document.getElementById("guess").value;
   if (!guess) return;
@@ -104,15 +106,16 @@ async function getGuessedPokemon(randomPkmData) {
   const guessPkmSpeciesData = await guessPkmSpeciesResponse.json();
 
   const guessedPkm = {
+    id: guessPkmData.id,
     imagem:
       guessPkmData?.sprites?.versions?.["generation-v"]?.["black-white"]
         ?.animated?.front_default || guessPkmData?.sprites?.front_default,
     geracao: guessPkmSpeciesData.generation.name,
     nome: guessPkmData.name,
     tipo1: guessPkmData.types[0].type.name,
-    tipo2: guessPkmData.types[1]?.type.name || "Não tem",
+    tipo2: guessPkmData.types[1]?.type.name || "não tem",
     cor: guessPkmSpeciesData.color.name,
-    habitat: guessPkmSpeciesData.habitat.name,
+    habitat: guessPkmSpeciesData.habitat?.name || "desconhecido",
     peso: `${guessPkmData.weight / 10} kg`,
     altura: `${guessPkmData.height * 10} cm`,
   };
@@ -121,52 +124,42 @@ async function getGuessedPokemon(randomPkmData) {
   renderGuess(guessedPkm, randomPkmData);
 }
 
+//Função que renderiza os dados do Pokemon escolhido pelo usuáiro
 function renderGuess(guessed, random) {
   const container = document.getElementById("guessesContainer");
   const div = document.createElement("div");
-  div.className = "guess-line";
-  div.innerHTML = `<div class="guess-box">
-    <img src="${
-      guessed.imagem
-    }" alt="Imagem do Pokémon" style="height: 50px;" />
-  </div>
+  div.className = "guessLine";
 
-  <div class="guess-box" style="background:${comparePokemonAtributos(
-    guessed.tipo1,
-    random.tipo1
-  )}">${guessed.tipo1}</div>
-  
+  //Listagem dos atributos a serem comparados (nome) com os seus valores (label)
+  const atributos = [
+    { nome: "tipo1", label: guessed.tipo1 },
+    { nome: "tipo2", label: guessed.tipo2 },
+    { nome: "habitat", label: guessed.habitat },
+    { nome: "cor", label: guessed.cor },
+    { nome: "geracao", label: guessed.geracao },
+    { nome: "altura", label: guessed.altura },
+    { nome: "peso", label: guessed.peso },
+  ];
 
-  <div class="guess-box" style="background:${comparePokemonAtributos(
-    guessed.tipo2,
-    random.tipo2
-  )}">${guessed.tipo2}</div>
+  //Map para percorrer o array de atributos e realizar as comparações para cada um deles
+  const attributesContainer = atributos
+    .map(
+      ({ nome, label }) =>
+        `<div class="guessBox" style="background:${comparePokemonAtributos(
+          guessed[nome],
+          random[nome]
+        )}">${label}</div>`
+    )
+    .join("");
 
-    <div class="guess-box" style="background:${comparePokemonAtributos(
-      guessed.habitat,
-      random.habitat
-    )}">${guessed.habitat}</div>
-
-    <div class="guess-box" style="background:${comparePokemonAtributos(
-      guessed.cor,
-      random.cor
-    )}">${guessed.cor}</div>
-
-    <div class="guess-box" style="background:${comparePokemonAtributos(
-      guessed.geracao,
-      random.geracao
-    )}">${guessed.geracao}</div>
-
-    <div class="guess-box" style="background:${comparePokemonAtributos(
-      guessed.altura,
-      random.altura
-    )}">${guessed.altura}</div>
-
-    <div class="guess-box" style="background:${comparePokemonAtributos(
-      guessed.peso,
-      random.peso
-    )}">${guessed.peso}</div>
+  //Após o map, aqui é renderizado através do innerHTML a imagem do pokemon escolhido e seus dados já comparados
+  div.innerHTML = `
+    <div class="guessBox whiteBg">
+      <img src="${guessed.imagem}" alt="${guessed.nome}"  />
+    </div>
+    ${attributesContainer}
   `;
 
+  //Metódo que faz possível a criação de um elemento filho no container
   container.appendChild(div);
 }
