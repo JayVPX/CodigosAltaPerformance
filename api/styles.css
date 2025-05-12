@@ -4,43 +4,117 @@
   box-sizing: border-box;
   font-family: "Oswald", sans-serif;
   scroll-behavior: smooth;
+  background-color: #1e293b;
+}
+.logo {
+  display: flex;
+  margin: 0 auto;
+  width: 700px;
+}
+.inputSection {
+  text-align: center;
+  margin-bottom: 100px;
 }
 
-h1 {
-  text-align: center;
-}
-.input-section {
-  text-align: center;
-  margin-bottom: 20px;
-}
 #guess {
-  padding: 8px;
+  padding: 10px;
   font-size: 16px;
-  width: 250px;
+  width: 300px;
+  border-radius: 8px;
+  color: #1e293b;
+  background-color: #eaeaea;
 }
 #submitGuess {
   padding: 8px 16px;
   font-size: 16px;
   margin-left: 8px;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 }
-#guessesContainer {
-  margin-top: 20px;
-}
-.guess-line {
-  display: flex;
-  margin: 8px 0;
+
+.guessHeader {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 100px); /* mesmo layout das linhas */
   gap: 5px;
+  margin: 20px auto 10px auto;
   justify-content: center;
 }
-.guess-box {
-  padding: 10px;
+
+.headerBox {
+  display: flex;
+  background-color: #1e293b;
+  font-weight: bold;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 8px;
+  /* border-radius: 10px; */
+  border-bottom: 2px solid #eaeaea;
+  font-size: 16px;
+  line-height: 2;
+  color: #eaeaea;
+}
+
+#guessesContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.guessLine {
+  display: grid;
+  grid-template-columns: 80px repeat(7, 100px); /* 1 coluna de imagem + 7 atributos */
+  gap: 5px;
+  margin: 8px 0;
+}
+
+.guessBox {
+  height: 60px;
   border-radius: 8px;
   color: white;
   font-weight: bold;
   text-align: center;
-  min-width: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 14px;
 }
-.guess-box img {
-  width: 40px;
-  height: 40px;
+
+.guessBox img {
+  width: 50px;
+  height: 50px;
+  background-color: white;
+}
+
+.guessBox.green {
+  background-color: #4caf50;
+}
+.guessBox.red {
+  background-color: #f44336;
+}
+.guessBox.arrow-up,
+.guessBox.arrow-down {
+  background-color: #d32f2f;
+  position: relative;
+}
+
+.guessBox.arrow-up .arrow,
+.guessBox.arrow-down .arrow {
+  font-size: 20px;
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.guessBox.whiteBg {
+  background-color: white;
+  padding: 5px;
 }

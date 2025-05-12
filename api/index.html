@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <!-- <h1>ATLAS.IO</h1>
-    <input type="text" placeholder="Digite o nome do país" id="countryInput" /> -->
-    <h1>PokeGuess - Adivinhe o Pokémon</h1>
-    <div class="input-section">
+    <img
+      src="../src/img/PokeGuess-12-05-2025.png"
+      class="logo"
+      alt="PokeGuess"
+    />
+    <div class="inputSection">
       <input
         type="text"
         id="guess"
@@ -20,13 +22,19 @@
         Enviar Palpite
       </button>
     </div>
+
+    <div class="guessHeader">
+      <div class="headerBox">Pokémon</div>
+      <div class="headerBox">Tipo 1</div>
+      <div class="headerBox">Tipo 2</div>
+      <div class="headerBox">Habitat</div>
+      <div class="headerBox">Cor</div>
+      <div class="headerBox">Geração</div>
+      <div class="headerBox">Altura</div>
+      <div class="headerBox">Peso</div>
+    </div>
     <div id="guessesContainer"></div>
 
-    <!-- <h2 id="country"></h2>
-    <p id="sigla"></p>
-    <p id="region"></p>
-    <p id="language"></p>
-    <p id="population"></p> -->
     <script src="index.js"></script>
   </body>
 </html>
