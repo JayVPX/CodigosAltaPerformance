@@ -36,9 +36,23 @@
   text-decoration: none;
 }
 
+.btn {
+  position: fixed;
+  top: 20px;
+  right: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .guessHeader {
   display: grid;
-  grid-template-columns: 80px repeat(7, 100px); /* mesmo layout das linhas */
+  grid-template-columns: 80px repeat(7, 100px);
   gap: 5px;
   margin: 20px auto 10px auto;
   justify-content: center;
@@ -85,6 +99,16 @@
   justify-content: center;
   flex-direction: column;
   font-size: 14px;
+
+  /* transição   */
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.guessBox.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .guessBox img {
@@ -99,22 +123,171 @@
 .guessBox.red {
   background-color: #f44336;
 }
-.guessBox.arrow-up,
-.guessBox.arrow-down {
-  background-color: #d32f2f;
-  position: relative;
-}
-
-.guessBox.arrow-up .arrow,
-.guessBox.arrow-down .arrow {
-  font-size: 20px;
-  position: absolute;
-  top: 5px;
-  right: 8px;
-  color: rgba(255, 255, 255, 0.8);
-}
 
 .guessBox.whiteBg {
   background-color: white;
   padding: 5px;
+}
+
+.modalContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #3341556e;
+  align-items: center;
+  justify-content: center;
+}
+
+.modalContainer.active {
+  display: inline-block;
+}
+
+.htpModal {
+  display: block;
+  padding: 2rem;
+  text-align: center;
+  background: #1e293b;
+  position: relative;
+  top: 200px;
+  left: 600px;
+  margin: 2rem;
+  width: 600px;
+  border-radius: 8px;
+}
+
+.htpModal h2 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  background: #1e293b;
+  font-family: "Oswald", sans-serif;
+  color: #eaeaea;
+  border-bottom: 2px solid #eaeaea;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.htpModal p {
+  margin-top: 20px;
+  text-align: justify;
+  color: #eaeaea;
+  background: #1e293b;
+  margin-bottom: 30px;
+}
+
+.green {
+  color: #4caf50;
+  background: #1e293b;
+
+  font-weight: bolder;
+}
+.red {
+  color: #d32f2f;
+  background: #1e293b;
+
+  font-weight: bolder;
+}
+
+.button {
+  /* position: fixed;
+  top: 20px;
+  right: 40px; */
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btnTwo {
+  position: fixed;
+  width: 100px;
+  top: 20px;
+  left: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #eaeaea;
+  color: #1e293b;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.winContainer {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #3341556e;
+  align-items: center;
+  justify-content: center;
+}
+
+.winContainer.active {
+  display: inline-block;
+}
+
+.winModal {
+  display: block;
+  padding: 2rem;
+  text-align: center;
+  background: #1e293b;
+  position: relative;
+  top: 200px;
+  left: 600px;
+  margin: 2rem;
+  width: 600px;
+  border-radius: 8px;
+}
+
+.winModal h2 {
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  background: #1e293b;
+  font-family: "Oswald", sans-serif;
+  color: #eaeaea;
+  border-bottom: 2px solid #1e293b;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.winModal p {
+  margin-top: 20px;
+  text-align: justify;
+  color: #eaeaea;
+  background: #1e293b;
+
+  margin-bottom: 30px;
+}
+
+.buttonOne {
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #4f46e5;
+  color: #eaeaea;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.buttonTwo {
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #eaeaea;
+  color: #1e293b;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
 }
