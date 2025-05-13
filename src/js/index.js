@@ -46,15 +46,3 @@ function cadastrar() {
 function login() {
   window.location.href = "pagInicial.html";
 }
-
-function goToList() {
-  window.location.href = "branchs/list.html";
-}
-
-function goToApi() {
-  window.location.href = "api/index.html";
-}
-
-function backToLogin() {
-  window.location.href = "index.html";
-}
