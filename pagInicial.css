@@ -41,7 +41,7 @@ h2 {
     margin: 0 auto;
 }
 
-button {
+a {
     background-color: var(--cor-principal);
     color: #f8f8f2;
     border: none;
@@ -50,8 +50,11 @@ button {
     cursor: pointer;
     font-size: 1em;
     transition: background-color 0.3s ease;
+    text-decoration: none;
+    text-underline-offset: 6px;
 }
 
-button:hover {
+a:hover {
     background-color: var(--cor-secundaria);
+    text-decoration: underline;
 }
