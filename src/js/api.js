@@ -161,5 +161,56 @@ function renderGuess(guessed, random) {
   `;
 
   //Metódo que faz possível a criação de um elemento filho no container
-  container.appendChild(div);
+  container.insertBefore(div, container.firstChild);
+
+  //Aplicação da transição em cada bloco do Box das informações do pokemon
+  const boxes = div.querySelectorAll(".guessBox");
+  boxes.forEach((box, index) => {
+    setTimeout(() => {
+      box.classList.add("show");
+    }, index * 400);
+  });
+
+  // Verifica se o nome do palpite do usuário é igual ao do Pokémon sorteado
+  const isCorrect = guessed.nome === random.nome;
+
+  // Espera o fim das animações antes de exibir a mensagem de acerto
+  if (isCorrect) {
+    const totalDelay = boxes.length * 150;
+    setTimeout(() => {
+      showWinModal();
+    }, totalDelay + 2000);
+  }
+}
+
+//Função que dá Reload para iniciar uma nova partida
+function playAgain() {
+  location.reload();
+}
+
+//Função que adiciona a flag "Active", mostrando o modal
+function showWinModal() {
+  const win = document.getElementById("winContainer");
+  win?.classList.add("active");
+}
+
+//Função que remove a flag "Active", desaparecendo com o modal
+function closeWinModal() {
+  const win = document.getElementById("winContainer");
+  win?.classList.remove("active");
+}
+
+function showModal() {
+  const modal = document.getElementById("modalContainer");
+  modal?.classList.add("active");
+}
+
+function closeModal() {
+  const modal = document.getElementById("modalContainer");
+  modal?.classList.remove("active");
+}
+
+//Função que retorna para a Home
+function goBack() {
+  window.location.href = "../pagInicial.html";
 }
