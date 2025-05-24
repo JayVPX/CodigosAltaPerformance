@@ -62,6 +62,7 @@ async function getRandomPokemon() {
   const response = await fetch(
     `https://pokeapi.co/api/v2/pokemon/${getRandomPkmId}`
   );
+
   const pokemonData = await response.json();
 
   const pkmSpeciesResponse = await fetch(
@@ -92,36 +93,55 @@ function comparePokemonAtributos(atributoGuessPkm, atributoRandomPkm) {
 
 //Função que pega os dados do Pokemon escolhido pelo usuário
 async function getGuessedPokemon(randomPkmData) {
-  const guess = document.getElementById("guess").value;
-  if (!guess) return;
+  try {
+    const guess = document.getElementById("guess").value;
+    if (!guess) return;
 
-  const guessResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon/${guess}`
-  );
-  const guessPkmData = await guessResponse.json();
+    const guessResponse = await fetch(
+      `https://pokeapi.co/api/v2/pokemon/${guess}`
+    );
+    //Captura a response 404 para dizer que o pokémon não foi encontrado
+    if (!guessResponse.ok) {
+      if (guessResponse.status === 404) {
+        throw new Error("Pokémon não encontrado! Tente novamente.");
+      }
+      throw new Error("Erro ao buscar Pokémon. Tente novamente mais tarde."); // Para outros erros
+    }
 
-  const guessPkmSpeciesResponse = await fetch(
-    `https://pokeapi.co/api/v2/pokemon-species/${guessPkmData.name}/`
-  );
-  const guessPkmSpeciesData = await guessPkmSpeciesResponse.json();
+    const guessPkmData = await guessResponse.json();
 
-  const guessedPkm = {
-    id: guessPkmData.id,
-    imagem:
-      guessPkmData?.sprites?.versions?.["generation-v"]?.["black-white"]
-        ?.animated?.front_default || guessPkmData?.sprites?.front_default,
-    geracao: guessPkmSpeciesData.generation.name,
-    nome: guessPkmData.name,
-    tipo1: guessPkmData.types[0].type.name,
-    tipo2: guessPkmData.types[1]?.type.name || "não tem",
-    cor: guessPkmSpeciesData.color.name,
-    habitat: guessPkmSpeciesData.habitat?.name || "desconhecido",
-    peso: `${guessPkmData.weight / 10} kg`,
-    altura: `${guessPkmData.height * 10} cm`,
-  };
-  console.log(guessedPkm);
+    const guessPkmSpeciesResponse = await fetch(
+      `https://pokeapi.co/api/v2/pokemon-species/${guessPkmData.name}/`
+    );
+    const guessPkmSpeciesData = await guessPkmSpeciesResponse.json();
 
-  renderGuess(guessedPkm, randomPkmData);
+    const guessedPkm = {
+      id: guessPkmData.id,
+      imagem:
+        guessPkmData?.sprites?.versions?.["generation-v"]?.["black-white"]
+          ?.animated?.front_default || guessPkmData?.sprites?.front_default,
+      geracao: guessPkmSpeciesData.generation.name,
+      nome: guessPkmData.name,
+      tipo1: guessPkmData.types[0].type.name,
+      tipo2: guessPkmData.types[1]?.type.name || "não tem",
+      cor: guessPkmSpeciesData.color.name,
+      habitat: guessPkmSpeciesData.habitat?.name || "desconhecido",
+      peso: `${guessPkmData.weight / 10} kg`,
+      altura: `${guessPkmData.height * 10} cm`,
+    };
+    console.log(guessedPkm);
+
+    renderGuess(guessedPkm, randomPkmData);
+  } catch (error) {
+    Toastify({
+      text: error.message,
+      duration: 3000,
+      gravity: "top",
+      position: "center",
+      backgroundColor: "#FF6347",
+      stopOnFocus: true,
+    }).showToast();
+  }
 }
 
 //Função que renderiza os dados do Pokemon escolhido pelo usuáiro
@@ -208,9 +228,4 @@ function showModal() {
 function closeModal() {
   const modal = document.getElementById("modalContainer");
   modal?.classList.remove("active");
-}
-
-//Função que retorna para a Home
-function goBack() {
-  window.location.href = "../pagInicial.html";
 }

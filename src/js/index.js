@@ -1,4 +1,5 @@
-import { parse } from 'cookie-es';    // este sim é feito pra rodar no browser
+import * as cookie from 'cookie-es';
+  
 
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
@@ -82,7 +83,8 @@ function login() {
   const senha = document.getElementById("senhaL").value.trim();
 
   const achado = usuarios.find(u => u.usuario === usuario && u.senha === senha);
-  const cookies = parse(document.cookie || '');
+  const cookies = cookie.parse(document.cookie || '');
+
 
   if (achado) {
     sessionStorage.setItem('user', JSON.stringify(achado));
