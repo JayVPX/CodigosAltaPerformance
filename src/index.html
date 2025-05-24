@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+  <head>
+    <!-- <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/src/imagens/Logo_Florissima-removebg-preview.png"
+    /> -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login & Register</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="login-container" id="container">
+      <div class="form-container sign-up">
+        <form>
+          <h1>Crie uma conta</h1>
+
+          <input type="text" placeholder="Nome" id="nomeR" />
+          <input type="text" placeholder="Usuário" id="usuarioR" />
+          <input type="email" placeholder="Email" id="emailR" />
+          <input type="password" placeholder="Senha" id="senhaR" />
+          <button type="button" class="register-btn" onclick="cadastrar()">
+            Cadastre-se
+          </button>
+        </form>
+      </div>
+
+      <div class="form-container sign-in">
+        <form>
+          <h1>Faça seu Login</h1>
+
+          <input type="text" placeholder="Usuário" id="usuarioL" />
+          <input type="password" placeholder="Senha" id="senhaL" />
+
+          <button type="button" class="login-btn" onclick="login()">
+            Entrar
+          </button>
+        </form>
+      </div>
+      <div class="toggle-container">
+        <div class="toggle">
+          <div class="toggle-panel toggle-left">
+            <h1>Bem vindo de Volta!</h1>
+            <p>
+              Insira seus dados pessoais para usar todas os recursos do site
+            </p>
+            <button class="hidden" id="toggle-login">Entrar</button>
+          </div>
+
+          <div class="toggle-panel toggle-right">
+            <h1>Olá, Seja Bem Vindo!</h1>
+            <p>
+              Registre-se com seus dados pessoais para usar todas os recursos do
+              site
+            </p>
+            <button class="hidden" id="toggle-register">Cadastre-se</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/js/index.js"></script>
+  </body>
+</html>

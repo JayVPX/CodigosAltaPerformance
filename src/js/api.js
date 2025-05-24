@@ -201,6 +201,8 @@ function renderGuess(guessed, random) {
       showWinModal();
     }, totalDelay + 2000);
   }
+<<<<<<< HEAD:src/js/api.js
+=======
 }
 
 //Função que dá Reload para iniciar uma nova partida
@@ -233,4 +235,32 @@ function closeModal() {
 //Função que retorna para a Home
 function goBack() {
   window.location.href = "../pagInicial.html";
+>>>>>>> 6dfd78e8a94e0b2ad5df4fe0885260978f9d1f9a:api/index.js
+}
+
+//Função que dá Reload para iniciar uma nova partida
+function playAgain() {
+  location.reload();
+}
+
+//Função que adiciona a flag "Active", mostrando o modal
+function showWinModal() {
+  const win = document.getElementById("winContainer");
+  win?.classList.add("active");
+}
+
+//Função que remove a flag "Active", desaparecendo com o modal
+function closeWinModal() {
+  const win = document.getElementById("winContainer");
+  win?.classList.remove("active");
+}
+
+function showModal() {
+  const modal = document.getElementById("modalContainer");
+  modal?.classList.add("active");
+}
+
+function closeModal() {
+  const modal = document.getElementById("modalContainer");
+  modal?.classList.remove("active");
 }
