@@ -88,9 +88,6 @@ function login() {
 
   if (achado) {
     sessionStorage.setItem('user', JSON.stringify(achado));
-  }
-
-  if (achado) {
     sessionStorage.setItem('isLoggedIn', 'true');
   // também gravamos um cookie pra middleware:
     document.cookie = 'isLoggedIn=true; Path=/; SameSite=Lax';
