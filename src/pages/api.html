@@ -4,16 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PokeGuess</title>
+    <link rel="stylesheet" href="/src/css/api.css" />
     <link
-    rel="stylesheet"
-    type="text/css"
-    href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
     />
-    <link rel="stylesheet" href="../css/api.css" />
   </head>
   <body>
     <img
-      src="../img/PokeGuess-12-05-2025.png"
+      src="/src/img/PokeGuess-12-05-2025.png"
       class="logo"
       alt="PokeGuess"
     />
@@ -32,7 +32,7 @@
       Como Jogar?
     </button>
 
-    <a href="./pagInicial.html" class="btnTwo">Voltar</a>
+    <button class="btnTwo" onclick="goBack()">Voltar</button>
 
     <div class="guessHeader">
       <div class="headerBox">Pokémon</div>
@@ -87,10 +87,10 @@
         <button class="buttonTwo" onclick="closeWinModal()">Fechar</button>
       </div>
     </div>
+    <script src="/src/js/api.js"></script>
     <script
-    type="text/javascript"
-    src="https://cdn.jsdelivr.net/npm/toastify-js"
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
     ></script>
-    <script type="module" src="../js/api.js"></script>
   </body>
 </html>
