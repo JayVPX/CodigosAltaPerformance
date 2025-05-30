@@ -6,7 +6,6 @@ export default function authMiddleware(req, res, next) {
   // ✅ Ignorar tudo que seja asset do Vite ou não seja uma rota "real de página"
   if (
     url === '/' ||
-    url === '/index.html' ||
     url.includes('.js') ||
     url.includes('.css') ||
     url.includes('.map') ||
