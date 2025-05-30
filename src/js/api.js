@@ -229,8 +229,3 @@ function closeModal() {
   const modal = document.getElementById("modalContainer");
   modal?.classList.remove("active");
 }
-
-//Função que retorna para a Home
-function goBack() {
-  window.location.href = "/src/pages/pagInicial.html";
-}

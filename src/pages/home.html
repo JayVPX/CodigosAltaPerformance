@@ -13,7 +13,7 @@
     <p>Para onde gostaria de ir:</p>
     <a href="usuarios.html"><button>Listagem de usuários</button></a>
     <a href="api.html"><button>Ir para API</button></a>
-    <button onclick="voltarLogin()">Retornar para o Login</button>
+    <a href="/">Retornar para o Login</a>
   </div>
 
   <script type="module" src="../js/index.js">
@@ -26,10 +26,6 @@
       spanUser.textContent = "visitante";
     }
 
-    function voltarLogin() {
-      localStorage.removeItem("nickname");
-      window.location.href = "../index.html";
-    }
   </script>
 </body>
 </html>

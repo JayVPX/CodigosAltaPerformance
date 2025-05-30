@@ -4,7 +4,7 @@ import * as cookie from 'cookie-es';
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
 
-  if (path.endsWith('/index.html')) {
+  if (path == '/' || path.endsWith('/index.html')) {
     const container = document.getElementById("container");
     const registerBtn = document.getElementById("toggle-register");
     const loginBtn = document.getElementById("toggle-login");
