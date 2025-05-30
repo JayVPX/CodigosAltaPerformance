@@ -1,5 +1,5 @@
-import * as cookie from 'cookie-es';
-  
+import * as yup from 'yup';
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', () => {
     loginBtn.addEventListener("click", () => {
       container.classList.remove("active");
     });
-  } 
+  }
 
   if (path.endsWith('/pagInicial.html')) {
     const boasVindas = document.getElementById("greeting");
-    const userJson   = sessionStorage.getItem('user');
+    const userJson = sessionStorage.getItem('user');
     if (userJson) {
       const user = JSON.parse(userJson);
-      boasVindas.textContent = `Olá, ${user.nome}`; 
+      boasVindas.textContent = `Olá, ${user.nome}`;
     }
   }
 
@@ -49,54 +49,95 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Cadastro Usuarios
-let usuarios = [];
-if (localStorage.getItem("usuarios")) {
-  // verifica se o local storage existe e converte o que houver lá para objeto e guarda no objeto de usuários
-  usuarios = JSON.parse(localStorage.getItem("usuarios"));
+let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]")
+
+function validarUsuario(usuario_object) {
+  const schema = yup.object({
+    nome: yup.string()
+      .required('Nome é obrigatório')
+      .min(3, 'Nome deve ter pelo menos 3 caracteres')
+      .matches(/^[A-Za-zÀ-ÿ\s]+$/, 'Nome não pode conter números ou símbolos'),
+
+    usuario: yup.string()
+      .required('Usuário é obrigatório')
+      .min(4, 'Usuário deve ter no mínimo 4 caracteres')
+      .test('sem-espacos', 'Usuário não pode conter espaços', value => !/\s/.test(value))
+      .test('usuario-existe', 'Usuário com esse Username já existe', function (value) {
+        const { usuarios } = this.options.context;
+        return !usuarios.some(u => u.usuario === value);
+      }),
+
+    email: yup.string()
+      .required('Email é obrigatório')
+      .email('Formato de email inválido')
+      .test('email-existe', 'Email já cadastrado', function (value) {
+        const { usuarios } = this.options.context;
+        return !usuarios.some(u => u.email === value);
+      }),
+
+    senha: yup.string()
+      .required('Senha é obrigatória')
+      .min(6, 'Senha deve ter pelo menos 6 caracteres')
+      .test('senha-forte', 'Senha deve conter uma letra maiúscula, um número e um caractere especial', value => {
+        return /[A-Z]/.test(value) &&
+               /[0-9]/.test(value) &&
+               /[^A-Za-z0-9]/.test(value);
+      })
+  });
+
+  return schema.validate(usuario_object, {
+    context: { usuarios },
+    abortEarly: false
+  })
+  .then(() => true)
+  .catch(err => {
+    alert(err.errors.join('\n'));
+    return false;
+  });
 }
 
 function cadastrar() {
-  // capturar os dados do input
+  // Capturar os dados do input
   let salvaNome = document.querySelector("#nomeR").value;
   let salvaUsuario = document.querySelector("#usuarioR").value;
   let salvaEmail = document.querySelector("#emailR").value;
   let salvaSenha = document.querySelector("#senhaR").value;
 
-  // criar um objeto com os dados do input
+  // Criar um objeto com os dados do input
   let usuario = {
     nome: salvaNome,
     usuario: salvaUsuario,
     email: salvaEmail,
     senha: salvaSenha,
   };
-
-  // adicionar o usuario criado a lista de usuários
-  usuarios.push(usuario);
-
-  // converte para stringify e guarda no local storage
-  localStorage.setItem("usuarios", JSON.stringify(usuarios));
+  validarUsuario(usuario).then(valido => {
+    if (valido) {
+      
+      usuarios.push(usuario); // Adicionar o usuario criado a lista de usuários
+      localStorage.setItem("usuarios", JSON.stringify(usuarios)); // Converte para stringify e guarda no local storage
+      alert("Usuário cadastrado com sucesso!");
+      window.location.href = '/'
+    }
+  });
 }
 
 function login() {
-  usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]")
+  // usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]")
   const usuario = document.getElementById("usuarioL").value.trim();
   const senha = document.getElementById("senhaL").value.trim();
 
   const achado = usuarios.find(u => u.usuario === usuario && u.senha === senha);
-  const cookies = cookie.parse(document.cookie || '');
-
 
   if (achado) {
     sessionStorage.setItem('user', JSON.stringify(achado));
     sessionStorage.setItem('isLoggedIn', 'true');
-  // também gravamos um cookie pra middleware:
+    // também gravamos um cookie pra middleware:
     document.cookie = 'isLoggedIn=true; Path=/; SameSite=Lax';
     window.location.href = '/pages/pagInicial.html';
 
   } else {
     alert("Usuário ou senha incorretos.");
   }
-  
 }
 
 function logOut() {
@@ -104,6 +145,7 @@ function logOut() {
   sessionStorage.setItem('isLoggedIn', 'false');
   document.cookie = 'isLoggedIn=false; Path=/; SameSite=Lax';
 }
+
 window.login = login;
 window.cadastrar = cadastrar;
 window.logOut = logOut;
