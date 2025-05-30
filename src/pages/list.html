@@ -4,19 +4,66 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lista de usuários</title>
+  <link rel="stylesheet" href="../css/pagInicial.css">
+  <link rel="stylesheet" href="../css/list.css">
 </head>
 <body>
-  <h1>Sou a página de list</h1>
-  <table>
-      <thead>
-    <tr>
-      <th>Nome</th><th>Usuário</th><th>Email</th><th>Senha</th>
-    </tr>
-  </thead>
-  <tbody id="listagem-usuarios">
+  <div class="listContainer">
+    <h1>Listagem de usuários</h1>
+    <button class="btnTwo" onclick="goBack()">Voltar</button>
+    <div class="users-container" id="users-container">
+      <!-- Os usuários serão carregados aqui -->
+      <script>
+        function carregarUsuarios() {
+          const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const container = document.getElementById('users-container');
+      container.innerHTML = '';
+      usuarios.forEach((user, idx) => {
+        const box = document.createElement('div');
+        box.className = 'user-box';
+        box.innerHTML = `
+          <div class="user-info"><strong>Nome:</strong> <span>${user.nome}</span></div>
+          <div class="user-info"><strong>Usuário:</strong> <span>${user.usuario}</span></div>
+          <div class="user-info"><strong>Email:</strong> <span>${user.email}</span></div>
+          <div class="user-info"><strong>Senha:</strong> <span>${user.senha}</span></div>
+          <div class="user-info"><strong>CPF:</strong> <span>${user.cpf}</span></div>
+          <div class="user-actions">
+            <button onclick="editarUsuario(${idx})">Editar</button>
+            <button onclick="excluirUsuario(${idx})">Excluir</button>
+          </div>
+        `;
+        container.appendChild(box);
+      });
+    }
 
-  </tbody>
-  </table>
-  <script type="module" src="../js/index.js"></script>
+    function excluirUsuario(idx) {
+      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      usuarios.splice(idx, 1);
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      carregarUsuarios();
+    }
+
+    function editarUsuario(idx) {
+      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      let user = usuarios[idx];
+      const nome = prompt("Novo nome:", user.nome) || user.nome;
+      const usuario = prompt("Novo usuário:", user.usuario) || user.usuario;
+      const email = prompt("Novo email:", user.email) || user.email;
+      const senha = prompt("Nova senha:", user.senha) || user.senha;
+      usuarios[idx] = { nome, usuario, email, senha };
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      carregarUsuarios();
+    }
+
+    carregarUsuarios();
+    window.editarUsuario = editarUsuario;
+    window.excluirUsuario = excluirUsuario;
+    function goBack() {
+    window.location.href = "./pagInicial.html";
+}
+
+  </script>
+  </div>
+ </div>
 </body>
 </html>
