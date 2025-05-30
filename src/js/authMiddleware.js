@@ -23,7 +23,7 @@ export default function authMiddleware(req, res, next) {
   // Redirecionamento client-side
   if (cookies.isLoggedIn !== 'true') {
     res.writeHead(200, { 'Content-Type': 'text/html' });
-    res.end(`<script>window.location.href = '/index.html';</script>`);
+    res.end(`<script>window.location.href = '/';</script>`);
     return;
   }
 

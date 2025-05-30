@@ -98,5 +98,12 @@ function login() {
   }
   
 }
+
+function logOut() {
+  sessionStorage.setItem('user', undefined);
+  sessionStorage.setItem('isLoggedIn', 'false');
+  document.cookie = 'isLoggedIn=false; Path=/; SameSite=Lax';
+}
 window.login = login;
 window.cadastrar = cadastrar;
+window.logOut = logOut;
