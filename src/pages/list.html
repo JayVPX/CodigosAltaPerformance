@@ -13,27 +13,73 @@
     <button class="btnTwo" onclick="goBack()">Voltar</button>
     <div class="users-container" id="users-container">
       <!-- Os usuários serão carregados aqui -->
-      <script>
-        function carregarUsuarios() {
-          const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    </div>
+  </div>
+
+  <script>
+    let editandoIdx = null;
+
+    function carregarUsuarios() {
+      const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
       const container = document.getElementById('users-container');
       container.innerHTML = '';
+
       usuarios.forEach((user, idx) => {
         const box = document.createElement('div');
         box.className = 'user-box';
-        box.innerHTML = `
-          <div class="user-info"><strong>Nome:</strong> <span>${user.nome}</span></div>
-          <div class="user-info"><strong>Usuário:</strong> <span>${user.usuario}</span></div>
-          <div class="user-info"><strong>Email:</strong> <span>${user.email}</span></div>
-          <div class="user-info"><strong>Senha:</strong> <span>${user.senha}</span></div>
-          <div class="user-info"><strong>CPF:</strong> <span>${user.cpf}</span></div>
-          <div class="user-actions">
-            <button onclick="editarUsuario(${idx})">Editar</button>
-            <button onclick="excluirUsuario(${idx})">Excluir</button>
-          </div>
-        `;
+
+        if (editandoIdx === idx) {
+          box.innerHTML = `
+            <div class="user-info"><strong>Nome:</strong><input type="text" id="editNome" value="${user.nome}" /></div>
+            <div class="user-info"><strong>Usuário:</strong><input type="text" id="editUsuario" value="${user.usuario}" /></div>
+            <div class="user-info"><strong>Email:</strong><input type="email" id="editEmail" value="${user.email}" /></div>
+            <div class="user-info"><strong>Senha:</strong><input type="text" id="editSenha" value="${user.senha}" /></div>
+            <div class="user-info"><strong>CPF:</strong><input type="text" id="editCpf" value="${user.cpf}" /></div>
+            <div class="user-actions">
+              <button onclick="salvarEdicao(${idx})">Salvar</button>
+              <button onclick="cancelarEdicao()">Cancelar</button>
+            </div>
+          `;
+        } else {
+          box.innerHTML = `
+            <div class="user-info"><strong>Nome:</strong> <span>${user.nome}</span></div>
+            <div class="user-info"><strong>Usuário:</strong> <span>${user.usuario}</span></div>
+            <div class="user-info"><strong>Email:</strong> <span>${user.email}</span></div>
+            <div class="user-info"><strong>Senha:</strong> <span>${'*'.repeat(user.senha.length)}</span></div>
+            <div class="user-info"><strong>CPF:</strong> <span>${user.cpf}</span></div>
+            <div class="user-actions">
+              <button onclick="editarUsuario(${idx})">Editar</button>
+              <button onclick="excluirUsuario(${idx})">Excluir</button>
+            </div>
+          `;
+        }
+
         container.appendChild(box);
       });
+    }
+
+    function editarUsuario(idx) {
+      editandoIdx = idx;
+      carregarUsuarios();
+    }
+
+    function cancelarEdicao() {
+      editandoIdx = null;
+      carregarUsuarios();
+    }
+
+    function salvarEdicao(idx) {
+      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+      const nome = document.getElementById('editNome').value;
+      const usuario = document.getElementById('editUsuario').value;
+      const email = document.getElementById('editEmail').value;
+      const senha = document.getElementById('editSenha').value;
+      const cpf = document.getElementById('editCpf').value;
+
+      usuarios[idx] = { nome, usuario, email, senha, cpf };
+      localStorage.setItem('usuarios', JSON.stringify(usuarios));
+      editandoIdx = null;
+      carregarUsuarios();
     }
 
     function excluirUsuario(idx) {
@@ -43,27 +89,12 @@
       carregarUsuarios();
     }
 
-    function editarUsuario(idx) {
-      let usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-      let user = usuarios[idx];
-      const nome = prompt("Novo nome:", user.nome) || user.nome;
-      const usuario = prompt("Novo usuário:", user.usuario) || user.usuario;
-      const email = prompt("Novo email:", user.email) || user.email;
-      const senha = prompt("Nova senha:", user.senha) || user.senha;
-      usuarios[idx] = { nome, usuario, email, senha };
-      localStorage.setItem('usuarios', JSON.stringify(usuarios));
-      carregarUsuarios();
+    function goBack() {
+      window.location.href = "./pagInicial.html";
     }
 
+    // Inicializa a lista ao carregar a página
     carregarUsuarios();
-    window.editarUsuario = editarUsuario;
-    window.excluirUsuario = excluirUsuario;
-    function goBack() {
-    window.location.href = "./pagInicial.html";
-}
-
   </script>
-  </div>
- </div>
 </body>
 </html>

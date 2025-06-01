@@ -1,0 +1,49 @@
+
+    .dados-container {
+      max-width: 500px;
+      margin: 50px auto;
+      padding: 20px;
+      border-radius: 10px;
+      background-color: #f4f4f4;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .dados-container h1 {
+      text-align: center;
+    }
+    .dados-item {
+      margin: 10px 0;
+    }
+    .dados-item label {
+      display: block;
+      font-weight: bold;
+    }
+    .dados-item span, .dados-item input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      border-radius: 10px;
+    }
+    .botoes {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    button {
+      padding: 8px 16px;
+      font-size: 1rem;
+      border-radius: 10px;
+    }
+    .btnTwo {
+  position: fixed;
+  width: 100px;
+  top: 20px;
+  left: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 10px;
+  background-color: #eaeaea;
+  color: #1e293b;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+}

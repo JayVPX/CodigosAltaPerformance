@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meus Dados</title>
+  <link rel="stylesheet" href="../css/pagInicial.css">
+<link rel="stylesheet" href="../css/dados.css" />
+</head>
+<body>
+  <div class="dados-container">
+    <h1>Meus Dados</h1>
+
+    <div class="dados-item">
+      <label for="nome">Nome</label>
+      <span id="nomeText"></span>
+    </div>
+    <div class="dados-item">
+      <label for="usuario">Usuário</label>
+      <span id="usuarioText"></span>
+    </div>
+    <div class="dados-item">
+      <label for="email">Email</label>
+      <span id="emailText"></span>
+    </div>
+    <div class="dados-item">
+      <label for="cpf">CPF</label>
+      <span id="cpfText"></span>
+    </div>
+
+    <div class="botoes">
+      <button onclick="editarDados()">Alterar</button>
+    </div>
+  </div>
+  <button class="btnTwo" onclick="voltar()">Voltar</button>
+
+  <script>
+    let user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    let editando = false;
+
+    function preencherCampos() {
+      document.getElementById("nomeText").textContent = user.nome;
+      document.getElementById("usuarioText").textContent = user.usuario;
+      document.getElementById("emailText").textContent = user.email;
+      document.getElementById("cpfText").textContent = user.cpf;
+    }
+
+    function editarDados() {
+      if (!editando) {
+        ['nome', 'usuario', 'email', 'cpf'].forEach(id => {
+          const span = document.getElementById(id + "Text");
+          const valor = span.textContent;
+          const input = document.createElement("input");
+          input.type = "text";
+          input.value = valor;
+          input.id = id + "Input";
+          span.replaceWith(input);
+        });
+
+        document.querySelector("button").textContent = "Salvar";
+        editando = true;
+      } else {
+        const novoNome = document.getElementById("nomeInput").value;
+        const novoUsuario = document.getElementById("usuarioInput").value;
+        const novoEmail = document.getElementById("emailInput").value;
+        const novoCpf = document.getElementById("cpfInput").value;
+
+        user.nome = novoNome;
+        user.usuario = novoUsuario;
+        user.email = novoEmail;
+        user.cpf = novoCpf;
+
+        // Atualiza o usuário no localStorage
+        let usuarios = JSON.parse(localStorage.getItem("usuarios") || "[]");
+        const idx = usuarios.findIndex(u => u.usuario === JSON.parse(sessionStorage.getItem("user")).usuario);
+
+        if (idx >= 0) {
+          usuarios[idx] = user;
+          localStorage.setItem("usuarios", JSON.stringify(usuarios));
+          sessionStorage.setItem("user", JSON.stringify(user));
+        }
+
+        // Volta os inputs para spans
+        ['nome', 'usuario', 'email', 'cpf'].forEach(id => {
+          const input = document.getElementById(id + "Input");
+          const valor = input.value;
+          const span = document.createElement("span");
+          span.id = id + "Text";
+          span.textContent = valor;
+          input.replaceWith(span);
+        });
+
+        document.querySelector("button").textContent = "Alterar";
+        editando = false;
+      }
+    }
+
+    function voltar() {
+      window.location.href = "./pagInicial.html";
+    }
+
+    preencherCampos();
+  </script>
+</body>
+</html>

@@ -25,7 +25,6 @@ body {
 }
 
 h1 {
-  /* margin-top: -200px; */
   color: #ffffff;
   font-size: 2.2rem;
   letter-spacing: 1px;
@@ -62,6 +61,7 @@ h1 {
 .user-info {
   margin-bottom: 18px;
   width: 100%;
+
 }
 
 .user-info strong {
@@ -102,3 +102,24 @@ h1 {
 .user-actions button:hover {
   filter: brightness(0.95);
 }
+  .user-box {
+      background-color: #f9f9f9;
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin: 10px;
+      border-radius: 8px;
+    }
+
+    .user-actions button {
+      margin: 5px;
+    }
+
+    .user-info {
+      margin: 5px 0;
+    }
+
+    .user-info input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 10px;
+    }
