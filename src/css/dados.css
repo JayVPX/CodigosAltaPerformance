@@ -1,39 +1,72 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  border: none;
+}
 
-    .dados-container {
-      max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 10px;
-      background-color: #f4f4f4;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    .dados-container h1 {
-      text-align: center;
-    }
-    .dados-item {
-      margin: 10px 0;
-    }
-    .dados-item label {
-      display: block;
-      font-weight: bold;
-    }
-    .dados-item span, .dados-item input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      border-radius: 10px;
-    }
-    .botoes {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 20px;
-    }
-    button {
-      padding: 8px 16px;
-      font-size: 1rem;
-      border-radius: 10px;
-    }
-    .btnTwo {
+.dados-container {
+  max-width: 500px;
+  width: 400px;
+  padding: 0.5rem;
+  margin: 50px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f4f4f4;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.dados-container h1 {
+  text-align: center;
+  font-size: 32px;
+  color: #4f46e5;
+}
+.dados-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 10px 0;
+}
+.dados-item label {
+  display: block;
+  font-weight: bold;
+  color: #4f46e5;
+  font-size: 1.1rem;
+}
+
+.dados-item input {
+  position: relative;
+  left: -0.2rem;
+  padding: 0.4rem;
+  outline: none;
+  font-size: 16px;
+}
+
+.dados-item span {
+  font-size: 1.1rem;
+}
+
+.dados-item span,
+.dados-item input {
+  width: 100%;
+  border-radius: 10px;
+}
+.botoes {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+button {
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 10px;
+  background-color: #6366f1;
+  color: #f4f4f4;
+}
+.btnTwo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   width: 100px;
   top: 20px;
@@ -46,4 +79,8 @@
   border: none;
   cursor: pointer;
   text-decoration: none;
+}
+
+.btnTwo:hover {
+  background-color: #eaeaea;
 }

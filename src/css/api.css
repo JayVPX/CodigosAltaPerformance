@@ -204,6 +204,9 @@
 }
 
 .btnTwo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   width: 100px;
   top: 20px;
