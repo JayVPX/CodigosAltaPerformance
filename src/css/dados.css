@@ -35,6 +35,7 @@
 }
 
 .dados-item input {
+  background-color: #cacaca;
   position: relative;
   left: -0.2rem;
   padding: 0.4rem;
