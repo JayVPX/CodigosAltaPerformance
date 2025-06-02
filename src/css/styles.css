@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Oswald", sans-serif;
+  font-family: 'Segoe UI', Arial, sans-serif;
   scroll-behavior: smooth;
 }
 
@@ -95,6 +95,10 @@ body {
 
 .form-container a {
   text-decoration: none;
+}
+
+.form-container h1 {
+  margin-bottom: 0.5rem;
 }
 
 .sign-in {
