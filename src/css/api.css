@@ -142,7 +142,7 @@
 }
 
 .modalContainer.active {
-  display: inline-block;
+  display: flex;
 }
 
 .htpModal {
