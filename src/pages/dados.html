@@ -12,19 +12,19 @@
     <h1>Meus Dados</h1>
 
     <div class="dados-item">
-      <label for="nome">Nome</label>
+      <label for="nome">Nome:</label>
       <span id="nomeText"></span>
     </div>
     <div class="dados-item">
-      <label for="usuario">Usuário</label>
+      <label for="usuario">Usuário:</label>
       <span id="usuarioText"></span>
     </div>
     <div class="dados-item">
-      <label for="email">Email</label>
+      <label for="email">Email:</label>
       <span id="emailText"></span>
     </div>
     <div class="dados-item">
-      <label for="cpf">CPF</label>
+      <label for="cpf">CPF:</label>
       <span id="cpfText"></span>
     </div>
 
@@ -32,7 +32,7 @@
       <button onclick="editarDados()">Alterar</button>
     </div>
   </div>
-  <button class="btnTwo" onclick="voltar()">Voltar</button>
+  <a href="./pagInicial.html" class="btnTwo">Voltar</a>
 
   <script>
     let user = JSON.parse(sessionStorage.getItem('user') || '{}');
@@ -93,10 +93,6 @@
         document.querySelector("button").textContent = "Alterar";
         editando = false;
       }
-    }
-
-    function voltar() {
-      window.location.href = "./pagInicial.html";
     }
 
     preencherCampos();
